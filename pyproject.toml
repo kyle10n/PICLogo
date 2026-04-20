@@ -3,24 +3,36 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "snc"
+name = "phyinc"
 description = "Make sequence logos using Felsenstain's phylogenetically independent contrast metod to take evolution into account"
-authors = [{name = "Haolin Guo"}]
+version="1.4"
+readme = "README.md"
+authors = [{name = "Lars Arvestad", email="arve@math.su.se"}]
 maintainers = [{name = "Lars Arvestad", email = "arve@math.su.se"}]
 classifiers = ["License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"]
-dynamic = ["version"]
 requires-python = ">=3.10"
 dependencies = [
 	     "matplotlib",
 	     "biopython>=1.8",
-	     "weblogo>=0.9"
+	     "logomaker",
+	     "pandas",
+	     "numpy",
 ]
 
 [project.scripts]
-phyinc = "phyinc:main"
+phyinc = "phyinc.main:main"
 
+[tool.setuptools]
+package-dir = {"" = "src"}
 
-[tool.setuptools.dynamic]
-version = {attr = "phyinc.version.__version__"}
+[tool.setuptools.packages.find]
+where = ["src"]
 
-
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "build",
+    "twine",
+]
+[project.urls]
+homepage = "https://github.com/arvestad/PhyInCLogo"
